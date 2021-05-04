@@ -2,8 +2,7 @@
 
 import os
 
-from app.similarity import SIMILARITY_MODE
-from app.similarity import TextSimilarity
+from app.similarity import SIMILARITY_MODE, TextSimilarity
 
 if __name__ == '__main__':
     mode = input("please input a compare mode ({}): ".format(list(SIMILARITY_MODE.keys())))

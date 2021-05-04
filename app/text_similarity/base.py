@@ -1,29 +1,24 @@
 # -*- coding: utf-8 -*-
 
-import os
+
+class LengthException(Exception):
+    """
+    长度异常
+    """
 
 
 class SimilarityBase:
 
-    def __init__(self, file_a: str, file_b: str):
+    def __init__(self, text_a: str, text_b: str):
         """
         初始化文本相似度
-        :param file_a: 文本文件 a 路径
-        :param file_b: 文本文件 b 路径
+        :param text_a: 对比文本 a
+        :param text_b: 对比文本 b
         """
-        text_a = ""
-        text_b = ""
-        if not os.path.isfile(file_a):
-            raise ValueError(file_a, "is not file")
-        elif not os.path.isfile(file_b):
-            raise ValueError(file_a, "is not file")
-        else:
-            with open(file_a, 'r') as f:
-                for line in f.readlines():
-                    text_a += line.strip()
-            with open(file_b, 'r') as f:
-                for line in f.readlines():
-                    text_b += line.strip()
+        if len(text_a) < 10 or len(text_a) > 150:
+            raise LengthException("len of text must between 10 and 150")
+        if len(text_b) < 10 or len(text_b) > 150:
+            raise LengthException("len of text must between 10 and 150")
         self.text_a = text_a
         self.text_b = text_b
 
