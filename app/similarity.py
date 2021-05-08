@@ -70,8 +70,8 @@ class TextSimilarity:
         """
 
         similarity = 0
-        for mode, weight in mode_weight:
+        for mode, weight in mode_weight.items():
             if mode not in SIMILARITY_MODE.keys():
                 raise ValueError("not support this mode: {}".format(mode))
-            similarity += SIMILARITY_MODE[mode](self.text_a, self.text_b).similarity()
+            similarity += SIMILARITY_MODE[mode](self.text_a, self.text_b).similarity() * weight / 100
         return similarity
