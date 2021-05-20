@@ -15,10 +15,10 @@ class SimilarityBase:
         :param text_a: 对比文本 a
         :param text_b: 对比文本 b
         """
-        if len(text_a) < 10 or len(text_a) > 150:
-            raise LengthException("len of text must between 10 and 150")
-        if len(text_b) < 10 or len(text_b) > 150:
-            raise LengthException("len of text must between 10 and 150")
+        # if len(text_a) < 10 or len(text_a) > 150:
+        #     raise LengthException("len of text must between 10 and 150")
+        # if len(text_b) < 10 or len(text_b) > 150:
+        #     raise LengthException("len of text must between 10 and 150")
         self.text_a = text_a
         self.text_b = text_b
 

@@ -3,6 +3,7 @@
 import os
 from typing import Dict
 
+from app.text_similarity.Word2vec import Word2vec
 from app.text_similarity.tf import TF
 from app.text_similarity.tf_idf import TFIDF
 from app.text_similarity.levenshtein import Levenshtein
@@ -11,6 +12,7 @@ SIMILARITY_MODE = {
     "TF": TF,
     "TF-IDF": TFIDF,
     "Levenshtein": Levenshtein,
+    "word2vec": Word2vec
 }
 
 

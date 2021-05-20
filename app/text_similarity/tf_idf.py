@@ -47,9 +47,20 @@ class TFIDF(SimilarityBase):
         for word in union_word_set:
             vec_a.append(word_to_tf_idf_a.get(word, 0))
             vec_b.append(word_to_tf_idf_b.get(word, 0))
-        return cos(vec_a, vec_b)
+        sim = cos(vec_a, vec_b)
+        if sim > 1:
+            sim = 1
+        return sim
 
 
 if __name__ == '__main__':
-    similarity = TFIDF("data/a.txt", "data/b.txt")
+    # s1 = "这件事办了很长时间，还没有办成"
+    # s2 = "锁管机暂时没有中国国家标准"
+    # s1 = "北京是中国的首都，是一个美丽的城市"
+    # s2 = "华盛顿是美国的首都，是一个繁华的城市"
+    # s1 = "我喜欢吃番茄"
+    # s2 = "我喜欢吃西红柿"
+    s1 = "今天天气很糟糕"
+    s2 = "今天天气很晴朗"
+    similarity = TFIDF(s1, s2)
     similarity.print_similarity()

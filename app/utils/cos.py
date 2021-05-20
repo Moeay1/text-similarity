@@ -20,5 +20,6 @@ def cos(vec_a: List[float], vec_b: List[float]) -> float:
 
     a = np.array(vec_a)
     b = np.array(vec_b)
-
+    if np.sum(a * b) == 0:
+        return 0
     return np.sum(a * b) / (np.sqrt(np.sum(a ** 2)) * np.sqrt(np.sum(b ** 2)))

@@ -21,5 +21,5 @@ class Levenshtein(SimilarityBase):
 
 
 if __name__ == '__main__':
-    similarity = Levenshtein("data/a.txt", "data/b.txt")
+    similarity = Levenshtein("这件事办了很长时间，还没有办成", "锁管机暂时没有中国国家标准")
     similarity.print_similarity()
