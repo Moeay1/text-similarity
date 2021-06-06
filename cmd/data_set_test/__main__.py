@@ -16,13 +16,7 @@ if __name__ == '__main__':
 
     for case in test_case_list:
         try:
-            actual_similarity = TextSimilarity(
-                case["text_a"],
-                case["text_b"],
-            ).similarity_for_weight(mode_weight={
-                "TF-IDF": 99,
-                "Levenshtein": 1
-            })
+            # actual_similarity = TextSimilarity(case["text_a"], case["text_b"]).similarity()
             # actual_similarity = TextSimilarity(
             #     case["text_a"],
             #     case["text_b"],
@@ -31,14 +25,24 @@ if __name__ == '__main__':
             #     case["text_a"],
             #     case["text_b"],
             # ).similarity("TF")
+            actual_similarity = TextSimilarity(
+                case["text_a"],
+                case["text_b"],
+            ).similarity("TF-IDF")
             # actual_similarity = TextSimilarity(
-            #      case["text_a"],
-            #      case["text_b"],
-            # ).similarity("TF-IDF")
+            #     case["text_a"],
+            #     case["text_b"],
+            # ).similarity("word2vec")
+            # actual_similarity = TextSimilarity(
+            #     case["text_a"],
+            #     case["text_b"],
+            # ).similarity_for_weight(mode_weight={
+            #     "TF-IDF": 99,
+            #     "Levenshtein": 1
+            # })
         except LengthException:
             continue
-        lacc = False
-        tacc = False
+
         expected_similarity = case["similarity"]
         if actual_similarity > 1:
             actual_similarity = 1
@@ -46,35 +50,24 @@ if __name__ == '__main__':
         for i in range(0, 6):
             if int(expected_similarity) == i:
                 if i == 0:
-                    if 0 <= actual_similarity < ((i + 1) / 6):
+                    if 0 <= actual_similarity < 1 / 6:
                         succeed_case_num += 1
-                        lacc = True
                     else:
                         failed_case_num += 1
                 if i == 5:
-                    if (i / 6) <= actual_similarity <= 1:
+                    if 5 / 6 <= actual_similarity <= 1:
                         succeed_case_num += 1
-                        lacc = True
                     else:
                         failed_case_num += 1
                 if 1 <= i <= 4:
-                    if (i / 6) <= actual_similarity <= ((i + 1) / 6):
+                    if (i / 6) <= actual_similarity < ((i + 1) / 6):
                         succeed_case_num += 1
-                        lacc = True
                     else:
                         failed_case_num += 1
-            if lacc == True:
-                if expected_similarity > 3:
-                    print(case["text_a"])
-                    print(case["text_b"])
-                    print(actual_similarity)
-
 
     acc = succeed_case_num / (succeed_case_num + failed_case_num)
-    print("mode: [{}], ACC: {}%".format({
-        "TF-IDF": 99,
-        "Levenshtein": 1
-    }, round(acc * 100, 4)))
+    print("acc", acc)
+    print(succeed_case_num + failed_case_num)
     end_time = time()
     run_time = end_time - begin_time
     print(run_time)

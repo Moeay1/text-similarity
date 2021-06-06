@@ -6,7 +6,7 @@ from app.similarity import TextSimilarity
 from app.text_similarity.base import LengthException
 
 if __name__ == '__main__':
-    with open("test_data/text_similarity.json", mode="r")as f:
+    with open("/Users/bytedance/Documents/textSimilarity/text-similarity/test_data/text_similarity.json", mode="r")as f:
         test_case_list = json.load(f)
 
     best_weight = None
@@ -34,10 +34,21 @@ if __name__ == '__main__':
 
             for i in range(0, 6):
                 if int(expected_similarity) == i:
-                    if (i / 6) < actual_similarity < ((i + 1) / 6):
-                        succeed_case_num += 1
-                    else:
-                        failed_case_num += 1
+                    if i == 0:
+                        if 0 <= actual_similarity < 1 / 6:
+                            succeed_case_num += 1
+                        else:
+                            failed_case_num += 1
+                    if i == 5:
+                        if 5 / 6 <= actual_similarity <= 1:
+                            succeed_case_num += 1
+                        else:
+                            failed_case_num += 1
+                    if 1 <= i <= 4:
+                        if (i / 6) <= actual_similarity < ((i + 1) / 6):
+                            succeed_case_num += 1
+                        else:
+                            failed_case_num += 1
 
         acc = succeed_case_num / (succeed_case_num + failed_case_num)
         if acc > best_acc:

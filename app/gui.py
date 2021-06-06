@@ -9,7 +9,8 @@ MODE_LIST = [
     "TF",
     "TF-IDF",
     "Levenshtein",
-    "TF-IDF + Levenshtein"
+    "TF-IDF + Levenshtein",
+    "word2vec"
 ]
 
 
@@ -18,9 +19,9 @@ class MyGUI(tkinter.Frame):
     def __init__(self):
         tkinter.Frame.__init__(self)
         self.pack()
-        self.text_a = tkinter.Text(self)
+        self.text_a = tkinter.Text(self, height=10)
         self.text_a.grid()
-        self.text_b = tkinter.Text(self)
+        self.text_b = tkinter.Text(self, height=10)
         self.text_b.grid()
         self.select_mode = ttk.Combobox(self, value=MODE_LIST)
         self.select_mode.current(0)
@@ -33,7 +34,7 @@ class MyGUI(tkinter.Frame):
     def compare_text(self):
         similarity_float = 0.0
         current_mode = self.select_mode.get()
-        if current_mode in {"TF", "TF-IDF", "Levenshtein"}:
+        if current_mode in {"TF", "TF-IDF", "Levenshtein", "word2vec"}:
             similarity_float = TextSimilarity(
                 self.text_a.get("1.0", "end"),
                 self.text_b.get("1.0", "end")
